@@ -10,3 +10,6 @@
 	path = frankenstein-batch
 	url = git@github.com:MatheusSantossss/frankenstein-batch.git
 	branch = main
+[submodule "frankenstein-ddl"]
+	path = frankenstein-ddl
+	url = git@github.com:MatheusSantossss/frankenstein-ddl.git
