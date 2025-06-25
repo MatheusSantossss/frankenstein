@@ -2,3 +2,6 @@
 	path = frankenstein-ms
 	url = git@github.com:MatheusSantossss/frankenstein-ms
 	branch = main
+[submodule "frankenstein-web"]
+	path = frankenstein-web
+	url = git@github.com:MatheusSantossss/frankenstein-web.git
