@@ -44,7 +44,7 @@
 - O **backend** deve ser desenvolvido utilizando **Spring Boot com Kotlin**.
 - O **frontend** deve ser implementado em **React**, com interface moderna e responsiva.
 - O sistema deve usar banco de dados relacional ou distribuído que garanta integridade transacional para operações de reserva e compra.
-- O sistema deve adotar uma arquitetura orientada a microsserviços ou baseada em serviços (por exemplo: produto, pedido, pagamento).
+- O sistema deve adotar uma arquitetura orientada a microsserviços ou baseada em serviços.
 - Deve ser possível **responder ao usuário antes de processar toda a cadeia do pedido**, usando padrões como *eventual consistency* ou *event-driven architecture*.
 - Deve seguir boas práticas de segurança como:
   - Criptografia de senhas (BCrypt)
