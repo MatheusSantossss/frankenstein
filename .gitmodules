@@ -5,3 +5,4 @@
 [submodule "frankenstein-web"]
 	path = frankenstein-web
 	url = git@github.com:MatheusSantossss/frankenstein-web.git
+	branch = main
