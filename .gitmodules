@@ -13,3 +13,6 @@
 [submodule "frankenstein-ddl"]
 	path = frankenstein-ddl
 	url = git@github.com:MatheusSantossss/frankenstein-ddl.git
+[submodule "frankenstein-arq-docs"]
+	path = frankenstein-arq-docs
+	url = git@github.com:MatheusSantossss/frankenstein-arq-docs.git
