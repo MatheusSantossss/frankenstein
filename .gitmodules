@@ -1,0 +1,3 @@
+[submodule "frankenstein-ms"]
+	path = frankenstein-ms
+	url = git@github.com:MatheusSantossss/frankenstein-ms
