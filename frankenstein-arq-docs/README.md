@@ -10,6 +10,8 @@ A documentação de requisitos funcionais bem como atributos de qualidade e rest
 ## Apresentação
 
 
-![diagrama-estrutural-frankenstein](https://github.com/user-attachments/assets/f479840c-6741-4acb-b044-bafde5d95a5c)
+![diagrama-estrutural-frankenstein](https://github.com/user-attachments/assets/627bc66b-a2ec-4ac2-8573-73a70624661b)
+
+
 
 ### Catálogo de elementos
