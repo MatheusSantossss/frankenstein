@@ -1,6 +1,6 @@
 ---
 
-# 📋 Requisitos Funcionais
+#  Requisitos Funcionais
 
 1. **Cadastro de Usuário**
    - O sistema deve permitir que novos usuários se cadastrem com informações como nome, e-mail e senha.
@@ -25,7 +25,7 @@
 
 ---
 
-# 🎯 Atributos de Qualidade
+#  Atributos de Qualidade
 
 | Qualidade                     | Descrição                                                                 |
 |------------------------------|---------------------------------------------------------------------------|
@@ -39,7 +39,7 @@
 
 ---
 
-# 🔒 Restrições de Design
+#  Restrições de Design
 
 - O **backend** deve ser desenvolvido utilizando **Spring Boot com Kotlin**.
 - O **frontend** deve ser implementado em **React**, com interface moderna e responsiva.
