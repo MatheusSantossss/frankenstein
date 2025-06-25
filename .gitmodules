@@ -6,3 +6,6 @@
 	path = frankenstein-web
 	url = git@github.com:MatheusSantossss/frankenstein-web
 	branch = main
+[submodule "frankenstein-batch"]
+	path = frankenstein-batch
+	url = git@github.com:MatheusSantossss/frankenstein-batch.git
