@@ -1,0 +1,33 @@
+apply plugin: 'kotlin-jpa'
+
+
+dependencies {
+    implementation(project(':core'))
+    implementation 'org.springframework.boot:spring-boot-starter-batch'
+    implementation 'org.jetbrains.kotlin:kotlin-reflect'
+    runtimeOnly 'org.postgresql:postgresql'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.jetbrains.kotlin:kotlin-test-junit5'
+    testImplementation 'org.springframework.batch:spring-batch-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testRuntimeOnly 'com.h2database:h2'
+}
+
+bootJar {
+    archiveBaseName = rootProject.name
+    archiveAppendix = "batch"
+}
+
+bootRun {
+    systemProperties = System.properties
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+allOpen {
+    annotation 'jakarta.persistence.Entity'
+    annotation 'jakarta.persistence.MappedSuperclass'
+    annotation 'jakarta.persistence.Embeddable'
+}

@@ -1,0 +1,132 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
+
+buildscript {
+    ext {
+        dependencyManagementPluginVersion = '1.1.7'
+
+        kotlinVersion = "1.9.10"
+        springBootVersion = "3.2.3"
+        springCloudVersion = "2023.0.0"
+        junitVersion = "5.10.1"
+        gradleSonarqubePluginVersion = "5.1.0.4882"
+        dependencyCheckPluginVersion = "8.3.1"
+        postgresqlVersion = "42.7.3"
+        infraArqMsVersion = "4.1.0"
+
+
+    }
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-noarg:${kotlinVersion}"
+        classpath "org.jetbrains.kotlin:kotlin-allopen:$kotlinVersion"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+        classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:${gradleSonarqubePluginVersion}"
+        classpath "org.owasp:dependency-check-gradle:${dependencyCheckPluginVersion}"
+        classpath "org.postgresql:postgresql:${postgresqlVersion}"
+    }
+}
+
+plugins {
+    id "org.springframework.boot" version "${springBootVersion}" apply false
+    id "io.spring.dependency-management" version "${dependencyManagementPluginVersion}"
+    id 'idea'
+    id 'org.sonarqube' version '3.3'
+    id 'org.owasp.dependencycheck' version '8.3.1'
+    id 'test-report-aggregation'
+    id 'jacoco-report-aggregation'
+}
+
+allprojects {
+    apply plugin: "kotlin"
+    apply plugin: "kotlin-spring"
+    apply plugin: 'jacoco'
+    apply plugin: 'io.spring.dependency-management'
+
+    group = 'br.com.frankenstein'
+    version = '0.0.1-SNAPSHOT'
+
+    repositories {
+        mavenCentral()
+        maven { url "https://repo.spring.io/milestone" }
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+        }
+    }
+
+    configurations.configureEach {
+        exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
+        exclude group: "org.apache.tomcat.embed", module: "tomcat-embed-el"
+        resolutionStrategy {
+            preferProjectModules()
+
+            cacheDynamicVersionsFor 0, 'seconds'
+
+            cacheChangingModulesFor 0, 'seconds'
+        }
+    }
+
+    tasks.register('listAllDependencies', DependencyReportTask) {}
+
+    tasks.withType(KotlinCompile).configureEach {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_17)
+            freeCompilerArgs.add("-Xjsr305=strict")
+        }
+    }
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(17)
+        }
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    dependencies {
+        implementation "org.springframework.cloud:spring-cloud-starter-config"
+    }
+}
+
+subprojects {
+    apply plugin: 'project-report'
+    apply plugin: 'org.springframework.boot'
+
+    idea {
+        module {
+            outputDir = file("$buildDir/classes/kotlin/main")
+            testOutputDir = file("$buildDir/classes/kotlin/test")
+        }
+    }
+
+
+    dependencies {
+        implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}"
+        implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.15.3'
+        implementation "com.fasterxml.jackson.module:jackson-module-kotlin"
+
+        testImplementation(enforcedPlatform("org.junit:junit-bom:${junitVersion}"))
+        testImplementation "org.junit.jupiter:junit-jupiter-api"
+        testImplementation "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
+    }
+
+    task sourceJar(type: Jar) {
+        from sourceSets.main.allSource
+    }
+
+}
+
+dependencies {
+    // dependências abaixo indicam quais projetos são considerados pelo plugin test-report-aggregation
+    testReportAggregation project(':frankenstein-ms')
+    testReportAggregation project(':batch')
+    testReportAggregation project(':core')
+    // dependências abaixo indicam quais projetos são considerados pelo plugin jacoco-report-aggregation
+    jacocoAggregation project(':frankenstein-ms')
+    jacocoAggregation project(':batch')
+    jacocoAggregation project(':core')
+}

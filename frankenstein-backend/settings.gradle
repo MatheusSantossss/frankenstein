@@ -1,0 +1,5 @@
+rootProject.name = 'frankenstein-backend'
+
+include 'core'
+include 'frankenstein-ms'
+include 'batch'

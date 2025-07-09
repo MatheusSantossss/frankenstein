@@ -1,0 +1,23 @@
+apply plugin: 'kotlin-noarg'
+apply plugin: 'kotlin-allopen'
+apply plugin: 'kotlin-jpa'
+apply plugin: "java-test-fixtures"
+
+
+
+bootJar {
+    enabled = false
+}
+jar {
+    enabled = true
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+allOpen {
+    annotation 'jakarta.persistence.Entity'
+    annotation 'jakarta.persistence.MappedSuperclass'
+    annotation 'jakarta.persistence.Embeddable'
+}
