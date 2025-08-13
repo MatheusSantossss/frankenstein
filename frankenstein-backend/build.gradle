@@ -121,11 +121,9 @@ subprojects {
 }
 
 dependencies {
-    // dependências abaixo indicam quais projetos são considerados pelo plugin test-report-aggregation
     testReportAggregation project(':frankenstein-ms')
     testReportAggregation project(':batch')
     testReportAggregation project(':core')
-    // dependências abaixo indicam quais projetos são considerados pelo plugin jacoco-report-aggregation
     jacocoAggregation project(':frankenstein-ms')
     jacocoAggregation project(':batch')
     jacocoAggregation project(':core')
