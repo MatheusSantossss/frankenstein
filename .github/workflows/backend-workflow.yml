@@ -1,0 +1,10 @@
+name: Buildar BackEnd
+on: workflow_dispatch
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Iniciar Gradle
+        run: gradle init
+      - name: Buildar com Gradle
+        run: gradle build
