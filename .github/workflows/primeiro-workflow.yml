@@ -5,4 +5,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Iniciar Gradle
-        run: ./gradlew build
+        run: gradle init
+      - name: Buildar com Gradle
+        run: gradle build
